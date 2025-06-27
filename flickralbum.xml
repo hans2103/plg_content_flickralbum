@@ -13,7 +13,6 @@
 
 	<files>
 		<folder>services</folder>
-		<folder>tmpl</folder>
 		<folder plugin="flickralbum">src</folder>
 	</files>
 

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension type="plugin" group="content" method="upgrade">
-    <name>plg_content_flickralbum</name>
+	<name>plg_content_flickralbum</name>
 	<author>HKweb</author>
 	<creationDate>2025-06</creationDate>
 	<copyright>(C) 2025 HKweb</copyright>
 	<license>GNU General Public License version 3, or later</license>
 	<authorEmail>info@hkweb.nl</authorEmail>
 	<authorUrl>hkweb.nl</authorUrl>
-	<version>25.26.1</version>
+	<version>25.26.2</version>
 	<description>PLG_CONTENT_FLICKRALBUM_XML_DESCRIPTION</description>
 	<namespace path="src">HKweb\Plugin\Content\FlickrAlbum</namespace>
 
 	<files>
-		<folder>services</folder>
-		<folder plugin="flickralbum">src</folder>
+		<folder>layouts</folder>
+		<folder plugin="flickralbum">services</folder>
+		<folder>src</folder>
 	</files>
 
 	<languages folder="language">
@@ -21,16 +22,16 @@
 		<language tag="en-GB">en-GB/plg_content_flickralbum.sys.ini</language>
 	</languages>
 
-    <config>
-        <fields name="params">
-            <fieldset name="basic">
-                <field
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
 					name="flickr_userid"
 					type="text"
 					label="PLG_CONTENT_FLICKRALBUM_FLICKRUSERID"
 					required="true"
 				/>
-            </fieldset>
-        </fields>
-    </config>
+			</fieldset>
+		</fields>
+	</config>
 </extension>

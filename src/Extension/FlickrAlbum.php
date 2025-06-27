@@ -13,6 +13,8 @@ namespace HKweb\Plugin\Content\FlickrAlbum\Extension;
 \defined('_JEXEC') or die;
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Plugin\CMSPlugin;
 
 /**
@@ -92,18 +94,23 @@ final class FlickrAlbum extends CMSPlugin
 
 		// If still empty, return error message
 		if (empty($userId)) {
-			Factory::getApplication()->enqueueMessage(
-				'Flickr User ID is not set. Please specify it in the tag or plugin settings.', 'error'
-			);
-			return ''; // Remove the tag from the content
+			$errorMsg = Text::_('PLG_SYSTEM_FLICKRALBUM_ERROR_NO_USERID');
+			Factory::getApplication()->enqueueMessage($errorMsg, 'error');
+
+			return '';
 		}
 
+		$basePath = JPATH_PLUGINS . '/content/flickralbum/layouts';
 		$embedUrl = "https://www.flickr.com/photos/$userId/albums/$albumId/player/";
 
-		return <<<HTML
-<div class="flickr-album-embed" style="overflow:hidden;position:relative;">
-    <iframe src="$embedUrl" width="100%" height="500" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-</div>
-HTML;
+		return LayoutHelper::render(
+			'media.flickralbum',
+			[
+				'albumId' => $albumId,
+				'userId' => $userId,
+				'embedUrl' => $embedUrl,
+			],
+			$basePath
+		);
 	}
 }

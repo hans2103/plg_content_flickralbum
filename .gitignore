@@ -1,1 +1,9 @@
-/build/plg_content_youtube.zip
+/build/plg_content_flickralbum.zip
+
+# IDE & System Related Files #
+.buildpath
+.project
+.settings
+.DS_Store
+.idea
+.swp

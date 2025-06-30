@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 3, or later</license>
 	<authorEmail>info@hkweb.nl</authorEmail>
 	<authorUrl>hkweb.nl</authorUrl>
-	<version>25.27.0</version>
+	<version>25.27.1</version>
 	<description>PLG_CONTENT_FLICKRALBUM_XML_DESCRIPTION</description>
 	<namespace path="src">HKweb\Plugin\Content\FlickrAlbum</namespace>
 

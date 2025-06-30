@@ -48,7 +48,7 @@ Then your Flickr user ID is:<br>
 ### Release steps
 
 - `build/build.sh`
-- `git commit -am 'prepare plg_content_fliockr 25.26.0'`
+- `git commit -am 'prepare plg_content_flickr 25.26.0'`
 - `git tag -s '25.26.0' -m 'plg_content_flickr 25.26.0'`
 - `git push origin --tags`
 - create the release on GitHub

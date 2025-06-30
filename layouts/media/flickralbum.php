@@ -2,10 +2,11 @@
 
 /**
  * @package         Joomla.Plugin
- * @subpackage      System.flickralbum
+ * @subpackage      Content.FlickrAlbum
  *
  * @copyright   (C) 2025 HKweb <https://hkweb.nl>
- * @license         GNU General Public License version 3 or later
+ * @license         GNU General Public License version 3 or later; see LICENSE.txt
+ * @link            https://hkweb.nl
  */
 
 \defined('_JEXEC') or die;

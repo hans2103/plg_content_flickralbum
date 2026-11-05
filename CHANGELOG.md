@@ -7,6 +7,8 @@ Version numbers follow `YY.WW.PATCH`: year, ISO week, patch number.
 
 ## [Unreleased]
 
+## [26.45.2] - 2026-11-05
+
 ### Fixed
 - The release workflow stops at the prepare step when `build/prepare-release.sh` fails (for example with nothing under Unreleased), instead of continuing with an empty version.
 

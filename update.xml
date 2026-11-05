@@ -7,12 +7,12 @@
         <type>plugin</type>
         <client>site</client>
         <folder>content</folder>
-        <version>26.45.1</version>
-        <infourl title="Flickr Album embed for Joomla">https://github.com/hans2103/plg_content_flickralbum/releases/tag/26.45.1</infourl>
+        <version>26.45.2</version>
+        <infourl title="Flickr Album embed for Joomla">https://github.com/hans2103/plg_content_flickralbum/releases/tag/26.45.2</infourl>
         <downloads>
-            <downloadurl type="full" format="zip">https://github.com/hans2103/plg_content_flickralbum/releases/download/26.45.1/plg_content_flickralbum.zip</downloadurl>
+            <downloadurl type="full" format="zip">https://github.com/hans2103/plg_content_flickralbum/releases/download/26.45.2/plg_content_flickralbum.zip</downloadurl>
         </downloads>
-        <sha512>5047f512b6d9f1f582abac02376633b2bee5f6772c468a044868c996cb3dcfb4ff25a91ee44369097d475ce76db141be8e5ebee27364644bae300a251c916ea9</sha512>
+        <sha512>58086c9cad493c21a7421348e2cc8cad6a64971b118fe44bc1dab5640c1983bceecba8f82306b640a9d01db5490b1934674381e40ecb1d25f0bfcd0090021c59</sha512>
         <tags>
             <tag>stable</tag>
         </tags>

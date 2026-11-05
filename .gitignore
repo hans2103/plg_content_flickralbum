@@ -1,9 +1,11 @@
-/build/plg_content_flickralbum.zip
+# Build output
+/build/*.zip
 
-# IDE & System Related Files #
+# IDE & system files
 .buildpath
 .project
 .settings
+.idea/
+.vscode/
 .DS_Store
-.idea
-.swp
+*.swp

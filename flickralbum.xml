@@ -20,7 +20,13 @@
 	<languages folder="language">
 		<language tag="en-GB">en-GB/plg_content_flickralbum.ini</language>
 		<language tag="en-GB">en-GB/plg_content_flickralbum.sys.ini</language>
+		<language tag="nl-NL">nl-NL/plg_content_flickralbum.ini</language>
+		<language tag="nl-NL">nl-NL/plg_content_flickralbum.sys.ini</language>
 	</languages>
+
+	<updateservers>
+		<server type="extension" name="Content - Flickr Album">https://raw.githubusercontent.com/hans2103/plg_content_flickralbum/main/update.xml</server>
+	</updateservers>
 
 	<config>
 		<fields name="params">

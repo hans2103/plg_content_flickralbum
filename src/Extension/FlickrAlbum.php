@@ -36,14 +36,14 @@ final class FlickrAlbum extends CMSPlugin
 	 * @param   string   $context  The context of the content being passed to the plugin.
 	 * @param   object   $article  The article object. Note $article->text is also available.
 	 * @param   mixed    $params   The article params.
-	 * @param   integer  $page     The 'page' number.
+	 * @param   ?integer $page     The 'page' number; null from some views (e.g. contact).
 	 *
 	 * @return  boolean  True on success.
 	 *
 	 * @throws Exception
 	 * @since   25.26.0
 	 */
-	public function onContentPrepare(string $context, object &$article, mixed &$params, int $page = 0): bool
+	public function onContentPrepare(string $context, object &$article, mixed &$params, ?int $page = 0): bool
 	{
 		if (!isset($article->text) || $article->text === null)
 		{

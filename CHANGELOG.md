@@ -7,6 +7,8 @@ Version numbers follow `YY.WW.PATCH`: year, ISO week, patch number.
 
 ## [Unreleased]
 
+## [26.45.1] - 2026-11-05
+
 ### Added
 - Update server: Joomla now finds new versions through `update.xml`.
 - Dutch (nl-NL) language files.

@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate plugin
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: none
+
+      - name: Install xmllint
+        run: sudo apt-get update && sudo apt-get install -y libxml2-utils
+
+      - name: Validate XML
+        run: xmllint --noout flickralbum.xml update.xml
+
+      - name: Check PHP syntax
+        run: find . -name '*.php' -not -path './.git/*' -print0 | xargs -0 -n1 php -l
+
+      - name: Check language files
+        run: |
+          for lang in en-GB nl-NL; do
+            for file in plg_content_flickralbum.ini plg_content_flickralbum.sys.ini; do
+              php -r 'exit(parse_ini_file($argv[1]) === false ? 1 : 0);' "language/$lang/$file" \
+                || { echo "Invalid or missing language/$lang/$file"; exit 1; }
+            done
+          done
+
+      - name: Check update.xml matches flickralbum.xml
+        run: |
+          plugin=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' flickralbum.xml)
+          update=$(sed -n 's:.*<version>\(.*\)</version>.*:\1:p' update.xml)
+          if [ "$plugin" != "$update" ]; then
+            echo "flickralbum.xml has $plugin, update.xml has $update"
+            exit 1
+          fi
+
+      - name: Build package
+        run: |
+          build/build.sh
+          for file in flickralbum.xml services/provider.php src/Extension/FlickrAlbum.php layouts/media/flickralbum.php \
+                      language/en-GB/plg_content_flickralbum.ini language/nl-NL/plg_content_flickralbum.ini; do
+            unzip -l build/plg_content_flickralbum.zip | grep -q " $file$" || { echo "Missing $file in package"; exit 1; }
+          done

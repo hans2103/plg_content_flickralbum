@@ -1,55 +1,52 @@
 # Flickr Album content plugin for Joomla
 
-This is a Joomla! plugin which replace `{flickr album="ALBUMID" user"USERID"}` by the Flickr Album embed.<br>
-The user id is optional when it is configured in plugin config.
+Joomla content plugin that replaces `{flickr album=ALBUMID user=USERID}` with an embedded Flickr album.
+`user` is optional when a Flickr user ID is set in the plugin settings. Values may be quoted: `{flickr album="ALBUMID" user="USERID"}`.
+A tag that an editor wrapped in `<p>`, `<div>` or `<span>` is replaced including that wrapper.
 
 ## Requirements
 
-* Joomla! 5.0 or newer
-* PHP 8.0 or newer
+* Joomla 5 or 6
+* PHP 8.1 or newer
+
+## Installation and updates
+
+Download `plg_content_flickralbum.zip` from the [latest release](https://github.com/hans2103/plg_content_flickralbum/releases/latest) and install it via **System → Install → Extensions**. Then enable **Content - Flickr Album** and set the Flickr user ID.
+
+From 26.46 on, Joomla finds updates itself through [`update.xml`](update.xml). Installs of 26.45.0 or older have no update server registered, so install the next version once by hand.
+
+## Content Security Policy
+
+The album is an iframe from `https://embedr.flickr.com/photosets/ALBUMID`, the host Flickr's own embed code uses.
+When the System - HTTP Headers plugin sends a Content-Security-Policy, add `https://embedr.flickr.com` to `frame-src` (and to `fullscreen` in the Permissions-Policy, if you set one).
+
+The plugin doesn't use `www.flickr.com/…/player/`: that page runs Flickr's cookie consent manager, which reloads the iframe endlessly when the browser blocks third-party cookies.
+
+## Finding your Flickr user ID
+
+* **Profile URL:** `https://www.flickr.com/photos/yourusername/` or `https://www.flickr.com/photos/12345678@N00/`. The last part is your user ID.
+* **Album URL:** in `https://www.flickr.com/photos/98765432@N04/albums/72177720301234567` the user ID is `98765432@N04` and the album ID is `72177720301234567`.
+
+## Development
+
+* `build/build.sh` builds `build/plg_content_flickralbum.zip` and prints its version and sha512.
+* CI (`.github/workflows/ci.yml`) validates the XML, PHP syntax and language files, and builds the package on every push to `main` and every pull request.
+
+## Releasing
+
+Versions follow `YY.WW.PATCH`: year, ISO week, patch number (`26.46.0` is the first release in week 46 of 2026).
+
+1. Merge the changes into `main`.
+2. In `CHANGELOG.md`, rename `## [Unreleased]` to `## [YY.WW.PATCH] - YYYY-MM-DD` and commit that to `main`.
+3. Tag and push:
+
+   ```bash
+   git tag 26.46.0
+   git push origin 26.46.0
+   ```
+
+The release workflow (`.github/workflows/release.yml`) then sets the version in `flickralbum.xml`, builds the zip, creates the GitHub release with the changelog section as notes and the zip attached, and commits the new version, download URL and sha512 to `flickralbum.xml` and `update.xml` on `main`. It stops when the tag isn't `YY.WW.PATCH` or `CHANGELOG.md` has no section for it.
 
 ## Support
 
-This plugin is primarily designed for use on HKweb projects, and as such, priority is given to the use cases there. Additional features or use cases will be considered on a case-by-case basis.
-
-## HTTPHeaders
-
-When using System Plugin HTTPHeaders with Content Security Policy please add `https://www.flickr.com/` to `frame-src`.
-
-## Flickr Admin ID and User ID
-
-Your Flickr user ID is a unique identifier for your Flickr account. You can find it in several ways:
-
-1. **Via Your Flickr Profile URL**<br>
-  Go to your Flickr profile in a web browser. The URL will look like one of these:
-    - If you set a custom username:<br>
-     `https://www.flickr.com/photos/yourusername/`<br>
-      Here, `yourusername` is your Flickr user ID.
-    - If you have not set a custom username:<br>
-      `https://www.flickr.com/photos/12345678@N00/`<br>
-      Here, `12345678@N00` is your Flickr user ID.
-2. Find User ID for Any Flickr Album
-   1. Visit your Flickr album page.
-   2. The URL will look like:<br>
-     `https://www.flickr.com/photos/12345678@N00/albums/12345678901234567`
-   3. The part after `/photos/` and before `/albums/` is your user ID (`12345678@N00` in this case).
-3. Using a Flickr User ID Lookup Tool<br>
-   If you only know your Flickr screen name, you can use a tool like:
-   -  [Flickr NSID Lookup Tool](https://www.webpagefx.com/tools/idgettr/)<br>
-      Enter your Flickr username or profile URL, and it will give you your user ID (also called “NSID”).
-
-### Example
-If your album URL is:<br>
-`https://www.flickr.com/photos/98765432@N04/albums/72177720301234567`<br>
-Then your Flickr user ID is:<br>
-`98765432@N04`
-
-
-### Release steps
-
-- `build/build.sh`
-- `git commit -am 'prepare plg_content_flickr 25.26.0'`
-- `git tag -s '25.26.0' -m 'plg_content_flickr 25.26.0'`
-- `git push origin --tags`
-- create the release on GitHub
-- `git push origin main`
+This plugin is primarily built for HKweb projects, so their use cases come first. Other features or use cases are considered case by case.

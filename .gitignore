@@ -9,3 +9,4 @@
 .vscode/
 .DS_Store
 *.swp
+/build/RELEASE_NOTES.md

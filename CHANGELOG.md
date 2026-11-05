@@ -10,7 +10,7 @@ Version numbers follow `YY.WW.PATCH`: year, ISO week, patch number.
 ### Added
 - Update server: Joomla now finds new versions through `update.xml`.
 - Dutch (nl-NL) language files.
-- CI checks (XML, PHP syntax, language files, package contents) and a release workflow triggered by a version tag.
+- CI checks (XML, PHP syntax, language files, package contents) and a release workflow you start from GitHub Actions: it picks the version, updates the changelog, `flickralbum.xml` and `update.xml`, tags and publishes the release.
 - GPL-3.0 licence text.
 
 ### Changed

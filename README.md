@@ -30,22 +30,25 @@ The plugin doesn't use `www.flickr.com/…/player/`: that page runs Flickr's coo
 ## Development
 
 * `build/build.sh` builds `build/plg_content_flickralbum.zip` and prints its version and sha512.
+* `build/prepare-release.sh` prepares a release in the working tree (see below).
 * CI (`.github/workflows/ci.yml`) validates the XML, PHP syntax and language files, and builds the package on every push to `main` and every pull request.
 
 ## Releasing
 
 Versions follow `YY.WW.PATCH`: year, ISO week, patch number (`26.46.0` is the first release in week 46 of 2026).
 
-1. Merge the changes into `main`.
-2. In `CHANGELOG.md`, rename `## [Unreleased]` to `## [YY.WW.PATCH] - YYYY-MM-DD` and commit that to `main`.
-3. Tag and push:
+1. Merge the changes into `main`, each with a line under `## [Unreleased]` in `CHANGELOG.md`.
+2. Start the release workflow, from **Actions → Release → Run workflow** on GitHub or with:
 
    ```bash
-   git tag 26.46.0
-   git push origin 26.46.0
+   gh workflow run release.yml
    ```
 
-The release workflow (`.github/workflows/release.yml`) then sets the version in `flickralbum.xml`, builds the zip, creates the GitHub release with the changelog section as notes and the zip attached, and commits the new version, download URL and sha512 to `flickralbum.xml` and `update.xml` on `main`. It stops when the tag isn't `YY.WW.PATCH` or `CHANGELOG.md` has no section for it.
+   Leave the version empty to get the next one for the current week (`26.46.0`, then `26.46.1`, …), or pass one: `gh workflow run release.yml -f version=26.46.0`.
+
+The workflow (`.github/workflows/release.yml`) runs `build/prepare-release.sh`, which renames `## [Unreleased]` to `## [VERSION] - DATE` (with a new empty Unreleased section above), sets the version in `flickralbum.xml`, builds the zip and points `update.xml` at the new release. The workflow then commits that to `main`, tags it, and creates the GitHub release with the changelog section as notes and the zip attached. It stops when the version isn't `YY.WW.PATCH`, the tag already exists or there is nothing under `## [Unreleased]`.
+
+To see what a release would change without publishing anything, run `build/prepare-release.sh` locally and undo it with `git checkout .`.
 
 ## Support
 

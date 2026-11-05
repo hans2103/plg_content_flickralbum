@@ -19,6 +19,11 @@ concurrency:
   group: release
   cancel-in-progress: false
 
+defaults:
+  run:
+    # Explicit bash adds -o pipefail, so a failing prepare-release.sh fails its step despite `| tee`.
+    shell: bash
+
 jobs:
   release:
     runs-on: ubuntu-latest

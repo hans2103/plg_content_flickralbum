@@ -104,7 +104,14 @@ final class FlickrAlbum extends CMSPlugin
 		}
 
 		$basePath = JPATH_PLUGINS . '/content/flickralbum/layouts';
-		$embedUrl = "https://www.flickr.com/photos/$userId/albums/$albumId/player/";
+		/*
+		 * Use Flickr's dedicated embed host (the one its own embed code uses) instead of
+		 * www.flickr.com/…/player/. The www page loads Flickr's cookie consent manager, which
+		 * stores its choice in a .flickr.com cookie and then reloads itself. Inside an iframe
+		 * that is a third-party cookie, which browsers block, so the player reloads endlessly:
+		 * it flickers and cannot be navigated. embedr.flickr.com has no such reload.
+		 */
+		$embedUrl = 'https://embedr.flickr.com/photosets/' . rawurlencode($albumId);
 
 		return LayoutHelper::render(
 			'media.flickralbum',

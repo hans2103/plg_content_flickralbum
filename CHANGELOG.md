@@ -7,6 +7,8 @@ Version numbers follow `YY.WW.PATCH`: year, ISO week, patch number.
 
 ## [Unreleased]
 
+## [26.45.3] - 2026-11-05
+
 ### Fixed
 - Pages that pass no page number to `onContentPrepare`, such as a contact page, no longer stop with a TypeError (`$page` may be null).
 
